@@ -14,7 +14,8 @@ jobs:
 
     defaults:
       run:
-        # Aquí debe ir la carpeta EXACTA donde vive tu pom.xml
+        # ← ESTE es el nombre EXACTO de la carpeta donde vive tu pom.xml.
+        #    En tu proyecto, esa carpeta se llama "gestion-vuelos" (guión medio).
         working-directory: gestion-vuelos
 
     steps:
@@ -47,7 +48,7 @@ jobs:
         with:
           name: Maven-Reports
           path: |
-            # Las rutas a los archivos XML generados
+            # ← Aquí también usamos "gestion-vuelos", no "gestion_vuelos"
             gestion-vuelos/target/site/jacoco/jacoco.xml
             gestion-vuelos/target/checkstyle-result.xml
             gestion-vuelos/target/pmd.xml
