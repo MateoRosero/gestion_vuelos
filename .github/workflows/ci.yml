@@ -1,10 +1,5 @@
-# ----------------------------------------------------------------------
-# .github/workflows/ci.yml
-# ----------------------------------------------------------------------
+name: Maven CI
 
-name: Maven CI   # <-- Esto va al principio, sin espacios al inicio
-
-# Definimos DÓNDE debe dispararse el workflow
 on:
   push:
     branches:
@@ -19,9 +14,7 @@ jobs:
 
     defaults:
       run:
-        # ESTE nombre debe coincidir EXACTAMENTE con tu carpeta de módulo Maven.
-        # Si tu carpeta se llama "gestion-vuelos", déjalo así; si en tu Explorer
-        # aparece como "gestion_vuelos", cámbialo a "gestion_vuelos".
+        # Aquí debe ir la carpeta EXACTA donde vive tu pom.xml
         working-directory: gestion-vuelos
 
     steps:
@@ -54,7 +47,7 @@ jobs:
         with:
           name: Maven-Reports
           path: |
-            # Estas rutas también deben coincidir con la carpeta de tu módulo
+            # Las rutas a los archivos XML generados
             gestion-vuelos/target/site/jacoco/jacoco.xml
             gestion-vuelos/target/checkstyle-result.xml
             gestion-vuelos/target/pmd.xml
