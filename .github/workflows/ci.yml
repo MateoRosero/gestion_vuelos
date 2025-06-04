@@ -1,17 +1,33 @@
+# ----------------------------------------------------------------------
+# .github/workflows/ci.yml
+# ----------------------------------------------------------------------
+
+name: Maven CI   # <-- Esto va al principio, sin espacios al inicio
+
+# Definimos DÓNDE debe dispararse el workflow
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     defaults:
       run:
-        working-directory: gestion-vuelos   # ← así está ahora
+        # ESTE nombre debe coincidir EXACTAMENTE con tu carpeta de módulo Maven.
+        # Si tu carpeta se llama "gestion-vuelos", déjalo así; si en tu Explorer
+        # aparece como "gestion_vuelos", cámbialo a "gestion_vuelos".
+        working-directory: gestion-vuelos
 
     steps:
-      # 1. Checkout del código
       - name: Checkout del código
         uses: actions/checkout@v4
 
-      # 2. Set up JDK 17
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
@@ -19,30 +35,26 @@ jobs:
           java-version: '17'
           cache: maven
 
-      # 3. Build and Test
       - name: Build and Test
         run: mvn clean verify
 
-      # 4. Checkstyle Analysis
       - name: Checkstyle Analysis
         run: mvn checkstyle:checkstyle
         continue-on-error: true
 
-      # 5. PMD Analysis
       - name: PMD Analysis
         run: mvn pmd:check
         continue-on-error: true
 
-      # 6. Generate Coverage Report
       - name: Generate Coverage Report
         run: mvn jacoco:report
 
-      # 7. Upload artifacts
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: Maven-Reports
           path: |
+            # Estas rutas también deben coincidir con la carpeta de tu módulo
             gestion-vuelos/target/site/jacoco/jacoco.xml
             gestion-vuelos/target/checkstyle-result.xml
             gestion-vuelos/target/pmd.xml
