@@ -1,3 +1,7 @@
+# ----------------------------------------------------------------------
+# Archivo: .github/workflows/ci.yml
+# ----------------------------------------------------------------------
+
 name: Maven CI
 
 on:
@@ -14,8 +18,8 @@ jobs:
 
     defaults:
       run:
-        # ← ESTE es el nombre EXACTO de la carpeta donde vive tu pom.xml.
-        #    En tu proyecto, esa carpeta se llama "gestion-vuelos" (guión medio).
+        # Aquí va la carpeta EXACTA donde se encuentra tu pom.xml,
+        # tal como aparece en tu repositorio: “gestion-vuelos” (guión medio).
         working-directory: gestion-vuelos
 
     steps:
@@ -48,7 +52,8 @@ jobs:
         with:
           name: Maven-Reports
           path: |
-            # ← Aquí también usamos "gestion-vuelos", no "gestion_vuelos"
+            # Estas rutas deben apuntar a donde Maven deja los XML,
+            # dentro de la carpeta gestion-vuelos (guión medio).
             gestion-vuelos/target/site/jacoco/jacoco.xml
             gestion-vuelos/target/checkstyle-result.xml
             gestion-vuelos/target/pmd.xml
