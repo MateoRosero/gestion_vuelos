@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ReservaVuelo.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gestion-vuelos</a> &gt; <a href="index.source.html" class="el_package">edu.universidad.gestionvuelos</a> &gt; <span class="el_source">ReservaVuelo.java</span></div><h1>ReservaVuelo.java</h1><pre class="source lang-java linenums">package edu.universidad.gestionvuelos;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * Gestiona reservas de clientes en vuelos.
+ * Internamente usa un mapa &lt;String:cliente, String:codigoVuelo&gt;.
+ */
+<span class="fc" id="L10">public class ReservaVuelo {</span>
+    // Mapa que relaciona nombre de cliente ↔ código de vuelo reservado
+<span class="fc" id="L12">    private Map&lt;String, String&gt; mapaReservas = new HashMap&lt;&gt;();</span>
+
+    /** Agrega una reserva (cliente, vuelo). */
+    public void agregarReserva(String cliente, String codigoVuelo) {
+<span class="pc bpc" id="L16" title="3 of 8 branches missed.">        if (cliente == null || cliente.isBlank() || codigoVuelo == null || codigoVuelo.isBlank()) {</span>
+<span class="fc" id="L17">            throw new IllegalArgumentException(&quot;Datos inválidos para reserva&quot;);</span>
+        }
+<span class="fc" id="L19">        mapaReservas.put(cliente, codigoVuelo);</span>
+<span class="fc" id="L20">    }</span>
+
+    /** Elimina una reserva existente; devuelve true si existía. */
+    public boolean cancelarReserva(String cliente) {
+<span class="fc bfc" id="L24" title="All 2 branches covered.">        return mapaReservas.remove(cliente) != null;</span>
+    }
+
+    /** Consulta el código de vuelo reservado por un cliente (null si no existe). */
+    public String obtenerVueloReserva(String cliente) {
+<span class="fc" id="L29">        return mapaReservas.get(cliente);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
